@@ -5,7 +5,6 @@ interface IProps {
   placeholder?: string
   shape?: string
   modelValue?: string | number
-  hasSearched?: boolean
 }
 
 const props = defineProps<IProps>()
@@ -16,7 +15,6 @@ interface IEmits {
   (e: 'clear'): void
   (e: 'update:modelValue', v?: string | number): void
   (e: 'inputClick'): void
-  (e: 'update:hasSearched', v?: boolean): void
 }
 
 const emits = defineEmits<IEmits>()
@@ -26,7 +24,6 @@ const onKeypress = (e: KeyboardEvent) => {
   if (e.keyCode === ENTER_CODE) {
     e.preventDefault()
     emits('search', props.modelValue)
-    emits('update:hasSearched', true)
   }
 }
 
