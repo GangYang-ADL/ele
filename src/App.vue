@@ -9,4 +9,11 @@ fetchTest()
   <router-view />
 </template>
 
-<style scoped></style>
+<style>
+@import 'normalize.css'l;
+
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>

@@ -1,14 +1,39 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import TheTop from './components/TheTop.vue'
+import SearchView from '@/views/search/SearchView.vue'
+import { useToggle } from '@/use/useToggle'
+
+const recommends = [
+  {
+    value: 1,
+    label: 'stew beef',
+  },
+  {
+    value: 2,
+    label: 'salad',
+  },
+]
+
+const [isSearchViewShow, toggleSearchView] = useToggle(false)
+</script>
 
 <template>
-  <div>Home</div>
-  <div>
-    <div class="test">我我我我我我我我我我</div>
+  <div class="home-page">
+    <Transition name="fade">
+      <SearchView v-if="isSearchViewShow" @cancel="toggleSearchView"></SearchView>
+    </Transition>
+    <TheTop :recommends="recommends" @searchClick="toggleSearchView" />
   </div>
 </template>
 
-<style>
-.test {
-  font-size: 39px;
+<style lang="scss" scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
