@@ -10,7 +10,7 @@ fetchTest()
 </template>
 
 <style>
-@import 'normalize.css' l;
+@import 'normalize.css';
 
 #app {
   -webkit-font-smoothing: antialiased;

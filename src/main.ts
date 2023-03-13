@@ -4,7 +4,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
-import { Tabbar, TabbarItem, Search, Icon } from 'vant'
+import { Tabbar, TabbarItem, Search, Icon, Loading, Skeleton } from 'vant'
 import 'vant/lib/index.css'
 
 const app = createApp(App)
@@ -18,6 +18,8 @@ app.use(Tabbar)
 app.use(TabbarItem)
 app.use(Search)
 app.use(Icon)
+app.use(Loading)
+app.use(Skeleton)
 
 app.use(createPinia())
 app.use(router)
