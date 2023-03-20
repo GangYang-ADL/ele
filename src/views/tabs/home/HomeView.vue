@@ -1,22 +1,12 @@
 <script setup lang="ts">
 import TheTop from './components/TheTop.vue'
+import TheTransformer from './components/TheTransformer.vue'
 import SearchView from '@/views/search/SearchView.vue'
 import { useToggle } from '@/use/useToggle'
 import { useAsync } from '@/use/useAsync'
 import { fetchHomePageData } from '@/api/home'
 import type { IHomeInfo } from '@/types'
 import OpLoadingView from '@/components/OpLoadingView.vue'
-
-const recommends = [
-  {
-    value: 1,
-    label: 'stew beef',
-  },
-  {
-    value: 2,
-    label: 'salad',
-  },
-]
 
 const [isSearchViewShow, toggleSearchView] = useToggle(false)
 
@@ -28,11 +18,12 @@ const { pending, data } = useAsync(fetchHomePageData, {} as IHomeInfo)
     <Transition name="fade">
       <SearchView v-if="isSearchViewShow" @cancel="toggleSearchView"></SearchView>
     </Transition>
-    <TheTop :recommends="recommends" @searchClick="toggleSearchView" />
+    <TheTop :recommends="data.searchRecommends" @searchClick="toggleSearchView" />
     <OpLoadingView :loading="pending" type="skeleton">
-      <div>
-        {{ data }}
+      <div class="home-page__banner">
+        <img v-for="v in data.banner" :key="v.imgUrl" :src="v.imgUrl" />
       </div>
+      <TheTransformer :data="data.transformer" />
     </OpLoadingView>
   </div>
 </template>
@@ -46,5 +37,17 @@ const { pending, data } = useAsync(fetchHomePageData, {} as IHomeInfo)
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.home-page {
+  background: var(--op-gray-bg-color);
+
+  &__banner {
+    img {
+      width: 100%;
+      padding-top: 10px;
+      background: white;
+    }
+  }
 }
 </style>

@@ -17,5 +17,7 @@ fetchTest()
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   font-size: 14px;
+
+  --op-gray-bg-color: rgb(244, 244, 244);
 }
 </style>

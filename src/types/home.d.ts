@@ -14,7 +14,7 @@ export interface ISearchResult {
 }
 
 export interface IHomeInfo {
-  banner: IBanner
+  banner: IBanner[]
   searchRecommends: ISearchRecommend[]
   transformer: ITransformer[]
   countdown: ICountdown
