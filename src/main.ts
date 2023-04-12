@@ -6,6 +6,7 @@ import router from './router'
 
 import { Tabbar, TabbarItem, Search, Icon, Loading, Skeleton } from 'vant'
 import 'vant/lib/index.css'
+import './assets/common.scss'
 
 const app = createApp(App)
 
