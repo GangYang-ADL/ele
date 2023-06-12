@@ -9,6 +9,8 @@ import { useAsync } from '@/use/useAsync'
 import { fetchHomePageData } from '@/api/home'
 import type { ICountdown, IHomeInfo } from '@/types'
 import OpLoadingView from '@/components/OpLoadingView.vue'
+import OpSwipe from './components/swipe/OpSwipe'
+import OpSwipeItem from './components/swipe/OpSwipeItem'
 
 const [isSearchViewShow, toggleSearchView] = useToggle(false)
 
@@ -36,6 +38,11 @@ const { pending, data } = useAsync(fetchHomePageData, {
       <ScrollBar :data="data.scrollBarInfoList" />
       <div class="home-page__activity">
         <CountDown :data="data.countdown" />
+        <OpSwipe class="home-page__activity__swipe" :autoplay="3000" :loop="true">
+          <OpSwipeItem v-for="v in data.activities" :key="v">
+            <img :src="v" />
+          </OpSwipeItem>
+        </OpSwipe>
       </div>
     </OpLoadingView>
   </div>
@@ -54,6 +61,7 @@ const { pending, data } = useAsync(fetchHomePageData, {
 
 .home-page {
   background: var(--op-gray-bg-color);
+  padding-bottom: 70px;
 
   &__banner {
     img {
@@ -68,6 +76,16 @@ const { pending, data } = useAsync(fetchHomePageData, {
     justify-content: space-between;
     align-items: center;
     margin: 10px;
+
+    &__swipe {
+      width: 180px;
+      height: 170px;
+      border-radius: 8px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 }
 </style>
