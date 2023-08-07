@@ -134,10 +134,6 @@ export default defineComponent({
     const next = () => {
       correctPosition()
 
-      // 为什么要 double？
-      // 因为 correctPosition 完成位置重置最多需要两次渲染，
-      // 第一次是 swipeItem setOffset，第二次是 track 的 offset
-      // 为了保证真正滚动时位置已经重置，所以这里需要 doubleRaf，等渲染两次
       doubleRaf(() => {
         state.swiping = false
         move({
@@ -189,7 +185,6 @@ export default defineComponent({
     const onTouchEnd = () => {
       const duration = Date.now() - touchStartTime
       const speed = delta.value / duration
-      // 如果滑动速度大于 0.25，或者滑动距离大于一半，则滚动到下一张
       const shouldSwipe = Math.abs(speed) > 0.25 || Math.abs(delta.value) > size.value / 2
 
       if (shouldSwipe) {

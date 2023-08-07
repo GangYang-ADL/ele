@@ -22,7 +22,7 @@ export function useChildren<T>(key: InjectionKey<ParentProvide<T>>) {
       link,
       unlink,
       ...value,
-    })
+    } as ParentProvide<T>)
   }
 
   return {
